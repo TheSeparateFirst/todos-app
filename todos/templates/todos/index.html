@@ -1,0 +1,9 @@
+{% if todo_lists %}
+    <ul>
+    {% for todo_list in todo_lists %}
+        <li><a href="{% url 'todos:list' todo_list.id %}"> {{todo_list.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Lists avaiable.</p>
+{% endif %}

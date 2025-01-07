@@ -1,0 +1,11 @@
+{{ todo_list }}
+
+{% if todo_list.child_items.all %}
+    <ul>
+    {% for item in todo_list.child_items.all %}
+        <li><a href="{% url 'todos:item' item.id %}">{{ item.task }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Tasks avaiable.</p>
+{% endif %}
