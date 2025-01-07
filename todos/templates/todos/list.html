@@ -3,7 +3,16 @@
 {% if todo_list.child_items.all %}
     <ul>
     {% for item in todo_list.child_items.all %}
-        <li><a href="{% url 'todos:item' item.id %}">{{ item.task }}</a></li>
+        {% if not item.parent %}
+            <li><a href="{% url 'todos:item' item.id %}">{{ item.task }}</a></li>
+            {% if item.subtasks %}
+                <ul>
+                {% for subtask in item.subtasks.all %}
+                <li><a href="{% url 'todos:item' subtask.id %}">{{ subtask.task }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endif %}
     {% endfor %}
     </ul>
 {% else %}

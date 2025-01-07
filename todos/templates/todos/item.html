@@ -1,0 +1,20 @@
+<h2><a href="{% url 'todos:list' item.parent_list.id %}"> {{ item.parent_list }}</a></h2>
+<br>
+<h3> {{ item }} </h3>
+
+<br>
+
+{% if item.parent %}
+<br> <b>Parent Task:</b> <a href="{% url 'todos:item' item.parent.id %}"> {{ item.parent }}</a>
+{% endif %}
+
+{% if item.subtasks.all %}
+<br> <h3>Subtasks:</h3>
+    <ul>
+    {% for subtask in item.subtasks.all %}
+        <li><a href="{% url 'todos:item' subtask.id %}">{{ subtask.task }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No subtasks avaiable.</p>
+{% endif %}

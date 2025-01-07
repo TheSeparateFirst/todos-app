@@ -17,5 +17,5 @@ def list(request, todo_list_id):
 
 def item(request, item_id):
     this_item = get_object_or_404(TodoItem, pk=item_id)
-    response = "You're looking at the '%s' Todo Item."
-    return HttpResponse(response % this_item)
+    context = { "item": this_item}
+    return render(request, "todos/item.html", context)
